@@ -55,13 +55,17 @@ const ServerHeader = ({ server, role }) => {
             )}
             {isModerator && (<DropdownMenuSeparator className="mx-2 bg-zinc-700" />)}
             {isAdmin && (
-                <DropdownMenuItem className="hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition text-rose-500 dark:text-rose-500 px-3 py-2 text-sm cursor-pointer">
+                <DropdownMenuItem
+                    onClick={() => onOpen("delete", { server })}
+                    className="hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition text-rose-500 dark:text-rose-500 px-3 py-2 text-sm cursor-pointer">
                     Delete Server
                     <Trash className="h-4 w-4 ml-auto" />
                 </DropdownMenuItem>
             )}
             {!isAdmin && (
-                <DropdownMenuItem className="hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition text-rose-500 dark:text-rose-500 px-3 py-2 text-sm cursor-pointer">
+                <DropdownMenuItem
+                    onClick={() => onOpen("leave", { server })}
+                    className="hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition text-rose-500 dark:text-rose-500 px-3 py-2 text-sm cursor-pointer">
                     Leave Server
                     <LogOut className="h-4 w-4 ml-auto" />
                 </DropdownMenuItem>

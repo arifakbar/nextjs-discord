@@ -5,7 +5,6 @@ import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export async function PATCH(req, params) {
-    console.log("Aa rhi h: ", params.params.serverId);
     try {
         const profile = await currentProfile();
         if (!profile) return NextResponse.json({ msg: "Unauthorized", status: 401 });
@@ -28,3 +27,4 @@ export async function PATCH(req, params) {
         return NextResponse.json({ msg: "Internal error", status: 500 })
     }
 }
+
