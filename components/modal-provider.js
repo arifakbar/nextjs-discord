@@ -9,21 +9,27 @@ import MembersManageModal from "./modal/members-manage-modal";
 import CreateChannelModal from "./modal/create-channel-modal";
 import LeaveServerModal from "./modal/leave-server-modal";
 import DeleteServerModal from "./modal/delete-server-modal";
+import DeleteChannelModal from "./modal/delete-channel-modal";
+import EditChannelModal from "./modal/edit-channel-modal";
 
 export const ModalProvider = () => {
-    const [isMounted, setIsMounted] = useState(false);
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
-    if (!isMounted) return null;
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+  if (!isMounted) return null;
 
-    return <>
-        <CreateServerModal />
-        <InviteModal />
-        <EditServerModal />
-        <MembersManageModal />
-        <CreateChannelModal />
-        <LeaveServerModal />
-        <DeleteServerModal />
+  return (
+    <>
+      <CreateServerModal />
+      <InviteModal />
+      <EditServerModal />
+      <MembersManageModal />
+      <CreateChannelModal />
+      <LeaveServerModal />
+      <DeleteServerModal />
+      <DeleteChannelModal />
+      <EditChannelModal />
     </>
-}
+  );
+};

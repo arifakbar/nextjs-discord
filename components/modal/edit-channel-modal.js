@@ -46,11 +46,11 @@ const formSchema = z.object({
   type: z.nativeEnum(ChannelType),
 });
 
-const CreateChannelModal = () => {
+const EditChannelModal = () => {
   const { isOpen, onClose, type, data } = useModal();
 
-  const isModalOpen = isOpen && type === "createChannel";
-  const { channelType } = data;
+  const isModalOpen = isOpen && type === "editChannel";
+  const { channel } = data;
 
   const router = useRouter();
   const params = useParams();
@@ -59,30 +59,26 @@ const CreateChannelModal = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      type: channelType || ChannelType.TEXT,
+      type: ChannelType.TEXT,
     },
   });
 
   useEffect(() => {
-    if (channelType) {
-      form.setValue("type", channelType);
-    } else {
-      form.setValue("type", ChannelType.TEXT);
-    }
-  }, [channelType, form]);
+    form.setValue("name", channel?.name);
+    form.setValue("type", channel?.type);
+  }, [channel, form]);
 
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values) => {
     try {
       const url = qs.stringifyUrl({
-        url: `/api/channels`,
+        url: `/api/channels/${channel.id}`,
         query: {
           serverId: params?.serverId,
         },
       });
-      const res = await axios.post(url, values);
-      console.log(res.data);
+      await axios.patch(url, values);
       form.reset();
       router.refresh();
       onClose();
@@ -101,7 +97,7 @@ const CreateChannelModal = () => {
       <DialogContent className=" bg-white dark:text-white text-black p-0 overflow-hidden">
         <DialogHeader className="p-6">
           <DialogTitle className="text-2xl text-center font-bold">
-            Create channel
+            Edit channel
           </DialogTitle>
         </DialogHeader>
         <Form {...form}>
@@ -174,4 +170,4 @@ const CreateChannelModal = () => {
   );
 };
 
-export default CreateChannelModal;
+export default EditChannelModal;
