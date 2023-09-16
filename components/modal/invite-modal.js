@@ -51,17 +51,17 @@ const InviteModal = () => {
     }
 
     return <Dialog open={isModalOpen} onOpenChange={onClose}>
-        <DialogContent className=" bg-white text-black p-0 overflow-hidden">
+        <DialogContent className="dark:text-white bg-white text-black p-0 overflow-hidden">
             <DialogHeader className="p-6">
-                <DialogTitle className="text-2xl text-center font-bold">
+                <DialogTitle className="text-2xl text-center font-bold ">
                     Invite Friends
                 </DialogTitle>
             </DialogHeader>
             <div className="p-6">
-                <Label className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
+                <Label className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70 ">
                     Server invite Link
                 </Label>
-                <div className="flex items-center mt-2 gap-x-2" >
+                <div className="flex items-center mt-2 gap-x-2 " >
                     <Input className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
                         value={inviteUrl}
                         disabled={loading}
@@ -70,7 +70,7 @@ const InviteModal = () => {
                         {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                     </Button>
                 </div>
-                <Button onClick={onNew} variant="link" size="sm" className="text-sm text-zinc-500 mt-4" disabled={loading}>
+                <Button onClick={onNew} variant="link" size="sm" className="dark:text-white text-sm text-zinc-500 mt-4" disabled={loading}>
                     Generate a new link
                     <RefreshCw className="w-4 h-4 ml-2" />
                 </Button>

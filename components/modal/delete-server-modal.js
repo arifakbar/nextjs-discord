@@ -42,7 +42,7 @@ const DeleteServerModal = () => {
 
 
     return <Dialog open={isModalOpen} onOpenChange={onClose}>
-        <DialogContent className=" bg-white text-black p-0 overflow-hidden">
+        <DialogContent className=" bg-white dark:text-white text-black p-0 overflow-hidden">
             <DialogHeader className="pt-8 px-6">
                 <DialogTitle className="text-2xl text-center font-bold">
                     Delete Server
@@ -53,7 +53,7 @@ const DeleteServerModal = () => {
             </DialogHeader>
             <DialogFooter className="bg-gray-100 px-6 py-4">
                 <div className="flex item-center justify-between w-full" >
-                    <Button variant="ghost" onClick={onClose} disabled={loading} >Cancel</Button>
+                    <Button variant="outline" className="dark:text-black" onClick={onClose} disabled={loading} >Cancel</Button>
                     <Button variant="primary" onClick={onClick} disabled={loading} >Confirm</Button>
                 </div>
             </DialogFooter>

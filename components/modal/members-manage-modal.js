@@ -72,7 +72,7 @@ const MembersManageModal = () => {
     }
 
     return <Dialog open={isModalOpen} onOpenChange={onClose}>
-        <DialogContent className=" bg-white text-black overflow-hidden">
+        <DialogContent className="dark:text-white bg-white text-black overflow-hidden">
             <DialogHeader className="p-6">
                 <DialogTitle className="text-2xl text-center font-bold">
                     Manage Members
@@ -84,7 +84,7 @@ const MembersManageModal = () => {
             <ScrollArea className="mt-8 max-h-[420px] pr-6">
                 {server?.members?.map(m => {
                     return <div key={m.id} className="flex items-center gap-x-2 mb-6">
-                        <UseAvatar src={m.profile.imageUrl} className="" />
+                        <UseAvatar src={m.profile.imageUrl} />
                         <div className="flex flex-col gap-y-1">
                             <div className="text-xs font-semibold flex items-center gap-x-1">
                                 {m.profile.name}
@@ -100,22 +100,22 @@ const MembersManageModal = () => {
                                     <DropdownMenuTrigger>
                                         <MoreVertical className="h-4 w-4 text-zinc-500" />
                                     </DropdownMenuTrigger>
-                                    <DropdownMenuContent side="left" className="dark:bg-black">
+                                    <DropdownMenuContent side="left">
                                         <DropdownMenuSub>
-                                            <DropdownMenuSubTrigger className="flex items-center">
+                                            <DropdownMenuSubTrigger className="flex items-center dark:hover:bg-zinc-500">
                                                 <ShieldQuestion className="w-4 h-4 mr-2" />
                                                 <span>Role</span>
                                             </DropdownMenuSubTrigger>
                                             <DropdownMenuPortal>
-                                                <DropdownMenuSubContent className="dark:bg-black">
-                                                    <DropdownMenuItem onClick={() => onRoleChange(m.id, "GUEST")}>
+                                                <DropdownMenuSubContent>
+                                                    <DropdownMenuItem className="dark:hover:bg-zinc-500"  onClick={() => onRoleChange(m.id, "GUEST")}>
                                                         <Shield className="h-4 w-4 mr-2" />
                                                         Guest
                                                         {m.role === "GUEST" && (
                                                             <Check className="h-4 w-4 ml-auto" />
                                                         )}
                                                     </DropdownMenuItem>
-                                                    <DropdownMenuItem onClick={() => onRoleChange(m.id, "MODERATOR")}>
+                                                    <DropdownMenuItem className="dark:hover:bg-zinc-500" onClick={() => onRoleChange(m.id, "MODERATOR")}>
                                                         <ShieldCheck className="h-4 w-4 mr-2" />
                                                         MODERATOR
                                                         {m.role === "MODERATOR" && (
@@ -126,7 +126,7 @@ const MembersManageModal = () => {
                                             </DropdownMenuPortal>
                                         </DropdownMenuSub>
                                         <DropdownMenuSeparator />
-                                        <DropdownMenuItem onClick={() => onDelete(m.id)}>
+                                        <DropdownMenuItem onClick={() => onDelete(m.id)} className="dark:hover:bg-zinc-500" >
                                             <Gavel className="h-4 w-4 mr-2" />
                                             Kick
                                         </DropdownMenuItem>

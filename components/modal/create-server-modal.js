@@ -69,7 +69,7 @@ const CreateServerModal = () => {
     }
 
     return <Dialog open={isModalOpen} onOpenChange={handleClose}>
-        <DialogContent className=" bg-white text-black p-0 overflow-hidden">
+        <DialogContent className="text-black dark:text-white p-0 overflow-hidden">
             <DialogHeader className="p-6">
                 <DialogTitle className="text-2xl text-center font-bold">
                     Customize your server
@@ -83,7 +83,7 @@ const CreateServerModal = () => {
                     <div className="space-y-8 px-6">
                         <div className="flex items-center justify-center text-center">
                             <FormField control={form.control} name="imageUrl" render={({ field }) => (
-                                <FormItem>
+                                <FormItem className="rounded dark:border border-dashed">
                                     <FormControl>
                                         <FileUpload endpoint="serverImage" onChange={field.onChange} value={field.value} />
                                     </FormControl>
