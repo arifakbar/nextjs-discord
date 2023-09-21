@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import ThemeProvider from "@/components/theme-provider";
 import { ModalProvider } from "@/components/modal-provider";
 import { SocketProvider } from "@/components/socket-provider";
+import { QueryProvider } from "@/components/query-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,7 +27,9 @@ export default function RootLayout({ children }) {
           >
             <SocketProvider>
               <ModalProvider />
-              {children}
+              <QueryProvider>
+                {children}
+              </QueryProvider>
             </SocketProvider>
           </ThemeProvider>
         </body>
