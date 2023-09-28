@@ -12,38 +12,29 @@ import { useModal } from "@/hooks/use-modal-store";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import axios from "axios";
-import { useParams, useRouter } from "next/navigation";
 import qs from "query-string";
 
-const DeleteChannelModal = () => {
+const DeleteMessageModal = () => {
   const { isOpen, onClose, type, data } = useModal();
-  const router = useRouter();
+  const [isDeleting, setIsDeleting] = useState(false);
 
-  const params = useParams();
+  const isModalOpen = isOpen && type === "deleteMessage";
 
-  const isModalOpen = isOpen && type === "deleteChannel";
-
-  const { channel } = data;
-
-  const [loading, setLoading] = useState(false);
+  const { socketUrl, socketQuery, id } = data;
 
   const onClick = async () => {
     try {
-      setLoading(true);
+      setIsDeleting(true);
       const url = qs.stringifyUrl({
-        url: `/api/channels/${channel?.id}`,
-        query: {
-          serverId: params?.serverId,
-        },
+        url: `${socketUrl}/${id}`,
+        query: socketQuery,
       });
       await axios.delete(url);
       onClose();
-      router.refresh();
-      router.push(`/servers/${params?.serverId}`);
+      setIsDeleting(false);
+      form.reset();
     } catch (err) {
       console.log(err);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -52,14 +43,11 @@ const DeleteChannelModal = () => {
       <DialogContent className=" bg-white dark:text-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
-            Delete Channel
+            Delete Message
           </DialogTitle>
           <DialogDescription className="text-center text-zinc-500">
-            Are you sure, you want to delete{" "}
-            <span className="font-semibold text-indigo-500">
-              {channel?.name}
-            </span>
-            ?
+            Are you sure, you want to delete this message? The message will be
+            deleted permanently!
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="bg-gray-100 px-6 py-4">
@@ -68,11 +56,11 @@ const DeleteChannelModal = () => {
               variant="outline"
               className="dark:text-black"
               onClick={onClose}
-              disabled={loading}
+              disabled={isDeleting}
             >
               Cancel
             </Button>
-            <Button variant="primary" onClick={onClick} disabled={loading}>
+            <Button variant="primary" onClick={onClick} disabled={isDeleting}>
               Confirm
             </Button>
           </div>
@@ -82,4 +70,4 @@ const DeleteChannelModal = () => {
   );
 };
 
-export default DeleteChannelModal;
+export default DeleteMessageModal;

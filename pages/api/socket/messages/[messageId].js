@@ -49,8 +49,6 @@ export default async function handler(req, res) {
     const member = servers.members.find((m) => m.profileId === profile.id);
     if (!member) return res.status(404).json({ error: "Member not found" });
 
-    console.log(messageId); //1bf32b2e-39dc-4869-a3ad-a14fa8465f68
-
     let message = await db.message.findFirst({
       where: {
         id: messageId,
@@ -115,13 +113,8 @@ export default async function handler(req, res) {
         },
       });
     }
-
-    console.log("M: ", message);
-
     const updateKey = `chat:${channelId}:messages:update`;
-
     res?.socket?.server?.io?.emit(updateKey, message);
-
     return res.status(200).json({ message });
   } catch (err) {
     console.log(err);
