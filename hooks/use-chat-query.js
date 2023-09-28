@@ -20,7 +20,7 @@ export const UseChatQuery = ({ queryKey, apiUrl, paramKey, paramValue }) => {
     return res.json();
   };
 
-  const { data, fetchNextPage, hasNextpage, isFetchingNextPage, status } =
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useInfiniteQuery({
       queryKey: [queryKey],
       queryFn: fetchMessages,
@@ -31,7 +31,7 @@ export const UseChatQuery = ({ queryKey, apiUrl, paramKey, paramValue }) => {
   return {
     data,
     fetchNextPage,
-    hasNextpage,
+    hasNextPage,
     isFetchingNextPage,
     status,
   };
